@@ -7,403 +7,336 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #1B2A4A;
-    --teal: #4ECDC4;
-    --teal-light: #A8E6E2;
-    --gold: #F4A261;
-    --warm-white: #F7F9FC;
-    --mid-gray: #8896A8;
-    --text-dark: #1E2D42;
-    --text-mid: #4A5568;
-    --card-bg: #FFFFFF;
-    --border: #E2E8F0;
-  }
+:root {
+  --navy: #1B2A4A;
+  --teal: #4ECDC4;
+  --teal-light: #A8E6E2;
+  --gold: #F4A261;
+  --warm-white: #F7F9FC;
+  --mid-gray: #8896A8;
+  --text-dark: #1E2D42;
+  --text-mid: #4A5568;
+  --card-bg: #FFFFFF;
+  --border: #E2E8F0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans TC', sans-serif; background: var(--warm-white); color: var(--text-dark); line-height: 1.7; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── ANNOUNCEMENT BANNER ── */
+#announcement-bar {
+  background: linear-gradient(90deg, var(--navy), #243660);
+  border-bottom: 1px solid rgba(78,205,196,0.3);
+  overflow: hidden; position: relative;
+  display: none;
+}
+#announcement-bar.visible { display: block; }
+.announce-inner {
+  display: flex; align-items: center; min-height: 40px;
+  padding: 0 1rem; gap: 1rem;
+}
+.announce-label {
+  flex: 0 0 auto;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--navy); background: var(--gold);
+  padding: 0.1rem 0.6rem; border-radius: 3px;
+}
+.announce-scroll {
+  flex: 1; overflow: hidden; position: relative;
+}
+.announce-track {
+  display: flex; gap: 3rem;
+  animation: marquee 22s linear infinite;
+  white-space: nowrap;
+}
+.announce-track:hover { animation-play-state: paused; }
+.announce-item {
+  font-size: 0.8rem; color: rgba(255,255,255,0.85);
+  white-space: nowrap; flex: 0 0 auto;
+}
+.announce-item a { color: var(--teal); text-decoration: none; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.announce-close {
+  flex: 0 0 auto; background: none; border: none;
+  color: rgba(255,255,255,0.4); cursor: pointer; font-size: 1rem; padding: 0 0.3rem;
+}
+.announce-close:hover { color: var(--gold); }
 
-  body {
-    font-family: 'Noto Sans TC', sans-serif;
-    background: var(--warm-white);
-    color: var(--text-dark);
-    line-height: 1.7;
-  }
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(27,42,74,0.97); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 56px;
+}
+.nav-logo { font-family: 'Noto Serif TC', serif; font-size: 0.9rem; font-weight: 700; color: var(--teal); letter-spacing: 0.05em; }
+.nav-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+.nav-links a { color: rgba(255,255,255,0.75); font-size: 0.8rem; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--teal); }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(27,42,74,0.97);
-    backdrop-filter: blur(8px);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem; height: 56px;
-  }
-  .nav-logo {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 0.9rem; font-weight: 700;
-    color: var(--teal); letter-spacing: 0.05em;
-  }
-  .nav-links { display: flex; gap: 1.5rem; }
-  .nav-links a {
-    color: rgba(255,255,255,0.75); font-size: 0.82rem;
-    text-decoration: none; font-weight: 500;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--teal); }
+/* ── HERO ── */
+.hero {
+  background: var(--navy); padding: 5rem 2rem 4rem;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -60px; left: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(78,205,196,0.15) 0%, transparent 70%); border-radius: 50%;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -80px; right: -40px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(244,162,97,0.1) 0%, transparent 70%); border-radius: 50%;
+}
+.hero-eyebrow {
+  display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+  color: var(--teal); border: 1px solid rgba(78,205,196,0.4);
+  padding: 0.3rem 0.9rem; border-radius: 20px; margin-bottom: 1.5rem;
+}
+.hero h1 { font-family: 'Noto Serif TC', serif; font-size: clamp(1.6rem,4vw,2.6rem); font-weight: 700; color: #fff; line-height: 1.4; max-width: 720px; margin: 0 auto 1.2rem; }
+.hero h1 span { color: var(--teal); }
+.hero-sub { color: rgba(255,255,255,0.6); font-size: 0.95rem; max-width: 540px; margin: 0 auto 2rem; }
+.hero-meta { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.hero-meta-item { text-align: center; }
+.hero-meta-item .num { font-family: 'Noto Serif TC', serif; font-size: 2rem; font-weight: 700; color: var(--gold); display: block; }
+.hero-meta-item .label { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+.sdg-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(78,205,196,0.1); border: 1px solid rgba(78,205,196,0.3); border-radius: 8px; padding: 0.5rem 1rem; color: var(--teal-light); font-size: 0.78rem; }
 
-  /* ── HERO ── */
-  .hero {
-    background: var(--navy);
-    padding: 5rem 2rem 4rem;
-    text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: -60px; left: -60px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(78,205,196,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .hero::after {
-    content: '';
-    position: absolute; bottom: -80px; right: -40px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(244,162,97,0.1) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .hero-eyebrow {
-    display: inline-block;
-    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
-    color: var(--teal); text-transform: uppercase;
-    border: 1px solid rgba(78,205,196,0.4);
-    padding: 0.3rem 0.9rem; border-radius: 20px;
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
-    font-weight: 700; color: #fff;
-    line-height: 1.4; max-width: 720px;
-    margin: 0 auto 1.2rem;
-  }
-  .hero h1 span { color: var(--teal); }
-  .hero-sub {
-    color: rgba(255,255,255,0.6);
-    font-size: 0.95rem; max-width: 540px;
-    margin: 0 auto 2rem;
-  }
-  .hero-meta {
-    display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
-    margin-bottom: 2.5rem;
-  }
-  .hero-meta-item {
-    text-align: center; color: rgba(255,255,255,0.85);
-  }
-  .hero-meta-item .num {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 2rem; font-weight: 700; color: var(--gold);
-    display: block;
-  }
-  .hero-meta-item .label {
-    font-size: 0.75rem; color: rgba(255,255,255,0.5);
-    letter-spacing: 0.05em;
-  }
-  .sdg-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: rgba(78,205,196,0.1); border: 1px solid rgba(78,205,196,0.3);
-    border-radius: 8px; padding: 0.5rem 1rem;
-    color: var(--teal-light); font-size: 0.78rem;
-  }
+/* ── SECTION COMMON ── */
+section { padding: 4rem 1.5rem; }
+.section-inner { max-width: 960px; margin: 0 auto; }
+.section-title { font-family: 'Noto Serif TC', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+.section-subtitle { font-size: 0.88rem; color: var(--mid-gray); margin-bottom: 2.5rem; }
+.section-divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--teal), var(--gold)); border-radius: 2px; margin-bottom: 1.5rem; }
 
-  /* ── SECTION COMMON ── */
-  section { padding: 4rem 1.5rem; }
-  .section-inner { max-width: 960px; margin: 0 auto; }
-  .section-title {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 1.5rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 0.5rem;
-  }
-  .section-subtitle {
-    font-size: 0.88rem; color: var(--mid-gray);
-    margin-bottom: 2.5rem;
-  }
-  .section-divider {
-    width: 40px; height: 3px;
-    background: linear-gradient(90deg, var(--teal), var(--gold));
-    border-radius: 2px; margin-bottom: 1.5rem;
-  }
+/* ── PIPELINE ── */
+#pipeline { background: var(--navy); }
+#pipeline .section-title { color: #fff; }
+#pipeline .section-subtitle { color: rgba(255,255,255,0.5); }
+.pipeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 1rem; margin-bottom: 2rem; scrollbar-width: thin; scrollbar-color: var(--teal) transparent; }
+.pipeline-step { flex: 0 0 auto; min-width: 140px; display: flex; flex-direction: column; align-items: center; cursor: pointer; position: relative; }
+.pipeline-step:not(:last-child)::after { content: ''; position: absolute; top: 20px; right: -20px; width: 40px; height: 2px; background: rgba(78,205,196,0.3); z-index: 1; }
+.step-circle { width: 42px; height: 42px; border-radius: 50%; border: 2px solid rgba(78,205,196,0.3); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; background: rgba(255,255,255,0.05); transition: all 0.25s; margin-bottom: 0.6rem; position: relative; z-index: 2; }
+.pipeline-step.active .step-circle, .pipeline-step:hover .step-circle { border-color: var(--teal); background: rgba(78,205,196,0.15); box-shadow: 0 0 16px rgba(78,205,196,0.3); }
+.step-label { font-size: 0.72rem; color: rgba(255,255,255,0.55); text-align: center; font-weight: 500; transition: color 0.25s; }
+.pipeline-step.active .step-label, .pipeline-step:hover .step-label { color: var(--teal); }
+.pipeline-detail { background: rgba(255,255,255,0.05); border: 1px solid rgba(78,205,196,0.2); border-radius: 12px; padding: 1.5rem; min-height: 120px; }
+.pipeline-detail h3 { font-family: 'Noto Serif TC', serif; color: var(--teal); font-size: 1rem; margin-bottom: 0.8rem; }
+.pipeline-detail p { color: rgba(255,255,255,0.65); font-size: 0.88rem; }
+.tool-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+.tool-chip { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(78,205,196,0.12); border: 1px solid rgba(78,205,196,0.25); color: var(--teal-light); font-size: 0.75rem; font-weight: 500; padding: 0.25rem 0.7rem; border-radius: 20px; }
 
-  /* ── PIPELINE (Signature element) ── */
-  #pipeline { background: var(--navy); }
-  #pipeline .section-title { color: #fff; }
-  #pipeline .section-subtitle { color: rgba(255,255,255,0.5); }
-  #pipeline .section-divider { background: linear-gradient(90deg, var(--teal), var(--gold)); }
+/* ── MEMBERS ── */
+#members { background: var(--warm-white); }
+.members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.member-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; transition: box-shadow 0.2s, transform 0.2s; }
+.member-card:hover { box-shadow: 0 6px 24px rgba(27,42,74,0.1); transform: translateY(-2px); }
+.member-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--navy)); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: white; font-weight: 700; margin-bottom: 0.8rem; font-family: 'Noto Serif TC', serif; }
+.member-name { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+.member-dept { font-size: 0.75rem; color: var(--mid-gray); line-height: 1.4; }
+.member-org { display: inline-block; margin-top: 0.5rem; font-size: 0.68rem; font-weight: 500; padding: 0.15rem 0.5rem; border-radius: 4px; }
+.org-internal { background: #EBF5FF; color: #2B6CB0; }
+.org-external { background: #FEFCE8; color: #92400E; }
 
-  .pipeline-track {
-    display: flex; gap: 0; overflow-x: auto;
-    padding-bottom: 1rem; margin-bottom: 2rem;
-    scrollbar-width: thin; scrollbar-color: var(--teal) transparent;
-  }
-  .pipeline-step {
-    flex: 0 0 auto; min-width: 140px;
-    display: flex; flex-direction: column; align-items: center;
-    cursor: pointer; position: relative;
-  }
-  .pipeline-step:not(:last-child)::after {
-    content: '';
-    position: absolute; top: 20px; right: -20px;
-    width: 40px; height: 2px;
-    background: rgba(78,205,196,0.3); z-index: 1;
-  }
-  .step-circle {
-    width: 42px; height: 42px; border-radius: 50%;
-    border: 2px solid rgba(78,205,196,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; background: rgba(255,255,255,0.05);
-    transition: all 0.25s; margin-bottom: 0.6rem;
-    position: relative; z-index: 2;
-  }
-  .pipeline-step.active .step-circle,
-  .pipeline-step:hover .step-circle {
-    border-color: var(--teal);
-    background: rgba(78,205,196,0.15);
-    box-shadow: 0 0 16px rgba(78,205,196,0.3);
-  }
-  .step-label {
-    font-size: 0.72rem; color: rgba(255,255,255,0.55);
-    text-align: center; font-weight: 500;
-    transition: color 0.25s;
-  }
-  .pipeline-step.active .step-label,
-  .pipeline-step:hover .step-label { color: var(--teal); }
+/* ── EVENTS ── */
+#events { background: #F0F4F9; }
+.events-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.event-item {
+  background: var(--card-bg); border-radius: 12px;
+  border-left: 3px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+.event-item:hover { border-left-color: var(--teal); box-shadow: 0 4px 16px rgba(27,42,74,0.08); }
+.event-header {
+  display: flex; gap: 1.2rem; align-items: flex-start;
+  padding: 1.2rem 1.5rem; cursor: pointer;
+}
+.event-date { flex: 0 0 56px; text-align: center; background: var(--navy); border-radius: 8px; padding: 0.5rem 0.3rem; color: white; }
+.event-date .month { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--teal-light); }
+.event-date .day { font-size: 1.4rem; font-weight: 700; font-family: 'Noto Serif TC', serif; }
+.event-content { flex: 1; }
+.event-title { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+.event-desc { font-size: 0.82rem; color: var(--text-mid); }
+.event-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+.event-status { font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 4px; white-space: nowrap; }
+.status-done { background: #E6F4EA; color: #1E7E34; }
+.status-upcoming { background: #FFF3E0; color: #E65100; }
+.status-open { background: #E8EAF6; color: #3949AB; }
+.event-toggle { font-size: 0.75rem; color: var(--teal); cursor: pointer; background: none; border: none; font-family: 'Noto Sans TC', sans-serif; padding: 0; white-space: nowrap; }
+.event-toggle:hover { text-decoration: underline; }
 
-  .pipeline-detail {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(78,205,196,0.2);
-    border-radius: 12px; padding: 1.5rem;
-    min-height: 120px; transition: all 0.3s;
-  }
-  .pipeline-detail h3 {
-    font-family: 'Noto Serif TC', serif;
-    color: var(--teal); font-size: 1rem; margin-bottom: 0.8rem;
-  }
-  .tool-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
-  .tool-chip {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    background: rgba(78,205,196,0.12); border: 1px solid rgba(78,205,196,0.25);
-    color: var(--teal-light); font-size: 0.75rem; font-weight: 500;
-    padding: 0.25rem 0.7rem; border-radius: 20px;
-  }
-  .pipeline-detail p { color: rgba(255,255,255,0.65); font-size: 0.88rem; }
+/* 聚會紀錄展開區 */
+.event-record {
+  display: none; border-top: 1px solid var(--border);
+  padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+  background: #F8FAFC;
+}
+.event-record.open { display: block; }
+.record-meta {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.record-badge {
+  font-size: 0.72rem; font-weight: 600;
+  padding: 0.2rem 0.7rem; border-radius: 4px;
+  background: rgba(78,205,196,0.12); color: #1A7A75;
+  border: 1px solid rgba(78,205,196,0.3);
+}
+.record-section-title {
+  font-size: 0.8rem; font-weight: 700; color: var(--navy);
+  letter-spacing: 0.05em; margin-bottom: 0.5rem; margin-top: 1rem;
+}
+.record-section-title:first-of-type { margin-top: 0; }
+.record-body { font-size: 0.85rem; color: var(--text-mid); line-height: 1.8; white-space: pre-wrap; }
+.record-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.record-tool-chip {
+  font-size: 0.72rem; padding: 0.15rem 0.6rem; border-radius: 12px;
+  background: #EBF5FF; color: #2B6CB0; border: 1px solid #BEE3F8;
+}
+.record-link {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-size: 0.78rem; color: var(--teal); text-decoration: none;
+  margin-top: 0.8rem; font-weight: 500;
+}
+.record-link:hover { text-decoration: underline; }
+.record-empty {
+  font-size: 0.82rem; color: var(--mid-gray); font-style: italic;
+  padding: 0.5rem 0;
+}
 
-  /* ── MEMBERS ── */
-  #members { background: var(--warm-white); }
-  .members-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-  .member-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.2rem;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-  .member-card:hover {
-    box-shadow: 0 6px 24px rgba(27,42,74,0.1);
-    transform: translateY(-2px);
-  }
-  .member-avatar {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal), var(--navy));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; color: white; font-weight: 700;
-    margin-bottom: 0.8rem;
-    font-family: 'Noto Serif TC', serif;
-  }
-  .member-name {
-    font-size: 0.95rem; font-weight: 600; color: var(--navy);
-    margin-bottom: 0.25rem;
-  }
-  .member-dept {
-    font-size: 0.75rem; color: var(--mid-gray); line-height: 1.4;
-  }
-  .member-org {
-    display: inline-block; margin-top: 0.5rem;
-    font-size: 0.68rem; font-weight: 500;
-    padding: 0.15rem 0.5rem; border-radius: 4px;
-  }
-  .org-internal { background: #EBF5FF; color: #2B6CB0; }
-  .org-external { background: #FEFCE8; color: #92400E; }
+/* ── POLL (時間調查) ── */
+#poll { background: var(--warm-white); }
+.poll-loading { font-size: 0.88rem; color: var(--mid-gray); }
+.poll-closed { font-size: 0.88rem; color: var(--mid-gray); font-style: italic; padding: 1rem 0; }
+.poll-title-block {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem;
+}
+.poll-round { font-size: 0.75rem; font-weight: 700; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+.poll-question { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+.poll-hint { font-size: 0.8rem; color: var(--mid-gray); }
+.poll-name-row {
+  display: flex; gap: 0.8rem; align-items: flex-end; margin-bottom: 1.2rem; flex-wrap: wrap;
+}
+.poll-name-row .form-group { flex: 1; min-width: 180px; }
+.poll-name-row label { font-size: 0.78rem; font-weight: 600; color: var(--text-mid); letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem; }
+.poll-name-row input { padding: 0.55rem 0.9rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text-dark); font-size: 0.88rem; font-family: 'Noto Sans TC', sans-serif; width: 100%; }
+.poll-name-row input:focus { outline: none; border-color: var(--teal); }
+.date-options { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+.date-option {
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--card-bg); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 0.9rem 1.1rem;
+  cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  user-select: none;
+}
+.date-option:hover { border-color: var(--teal); background: rgba(78,205,196,0.04); }
+.date-option.selected { border-color: var(--teal); background: rgba(78,205,196,0.08); }
+.date-option input[type=checkbox] { display: none; }
+.date-check {
+  width: 20px; height: 20px; border-radius: 4px; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: all 0.15s; font-size: 0.85rem;
+}
+.date-option.selected .date-check { background: var(--teal); border-color: var(--teal); color: var(--navy); font-weight: 700; }
+.date-label { flex: 1; }
+.date-label .date-main { font-size: 0.92rem; font-weight: 600; color: var(--navy); }
+.date-label .date-note { font-size: 0.75rem; color: var(--mid-gray); }
+.date-bar-wrap { flex: 0 0 120px; }
+.date-bar-bg { background: var(--border); border-radius: 4px; height: 8px; overflow: hidden; }
+.date-bar-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold)); border-radius: 4px; transition: width 0.4s; }
+.date-count { font-size: 0.72rem; color: var(--mid-gray); text-align: right; margin-top: 0.2rem; }
 
-  /* ── EVENTS ── */
-  #events { background: #F0F4F9; }
-  .events-list { display: flex; flex-direction: column; gap: 1rem; }
-  .event-item {
-    display: flex; gap: 1.2rem; align-items: flex-start;
-    background: var(--card-bg); border-radius: 12px;
-    padding: 1.2rem 1.5rem;
-    border-left: 3px solid transparent;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .event-item:hover { border-left-color: var(--teal); box-shadow: 0 4px 16px rgba(27,42,74,0.08); }
-  .event-date {
-    flex: 0 0 56px; text-align: center;
-    background: var(--navy); border-radius: 8px;
-    padding: 0.5rem 0.3rem; color: white;
-  }
-  .event-date .month { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--teal-light); }
-  .event-date .day { font-size: 1.4rem; font-weight: 700; font-family: 'Noto Serif TC', serif; }
-  .event-content { flex: 1; }
-  .event-title { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
-  .event-desc { font-size: 0.82rem; color: var(--text-mid); }
-  .event-status {
-    font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem;
-    border-radius: 4px; align-self: center; white-space: nowrap;
-  }
-  .status-done { background: #E6F4EA; color: #1E7E34; }
-  .status-upcoming { background: #FFF3E0; color: #E65100; }
-  .status-open { background: #E8EAF6; color: #3949AB; }
+.poll-submit-row { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.poll-submit-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: linear-gradient(135deg, var(--teal), #3ABDB5);
+  color: var(--navy); font-weight: 700; font-size: 0.88rem;
+  border: none; border-radius: 8px; padding: 0.65rem 1.5rem;
+  cursor: pointer; font-family: 'Noto Sans TC', sans-serif; transition: opacity 0.2s;
+}
+.poll-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.poll-submit-btn:hover:not(:disabled) { opacity: 0.9; }
+.poll-msg { font-size: 0.82rem; padding: 0.5rem 0.9rem; border-radius: 8px; }
+.poll-msg.success { background: rgba(78,205,196,0.12); color: #1A7A75; }
+.poll-msg.error { background: rgba(244,162,97,0.15); color: #C05621; }
 
-  /* ── TOOL WIKI ── */
-  #tools { background: var(--warm-white); }
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem; margin-bottom: 2rem;
-  }
-  .tool-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.3rem;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-  .tool-card:hover { box-shadow: 0 6px 24px rgba(27,42,74,0.1); transform: translateY(-2px); }
-  .tool-card-header {
-    display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem;
-  }
-  .tool-icon { font-size: 1.5rem; }
-  .tool-name { font-size: 0.95rem; font-weight: 600; color: var(--navy); }
-  .tool-stage {
-    display: inline-block; font-size: 0.68rem; font-weight: 600;
-    padding: 0.15rem 0.5rem; border-radius: 4px;
-    background: var(--teal-light); color: var(--navy); margin-bottom: 0.6rem;
-  }
-  .tool-note { font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; }
-  .tool-stars { color: var(--gold); font-size: 0.85rem; margin-top: 0.5rem; }
-  .tool-contributor { font-size: 0.72rem; color: var(--mid-gray); margin-top: 0.4rem; }
+/* ── TOOL WIKI ── */
+#tools { background: #F0F4F9; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.tool-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem; transition: box-shadow 0.2s, transform 0.2s; }
+.tool-card:hover { box-shadow: 0 6px 24px rgba(27,42,74,0.1); transform: translateY(-2px); }
+.tool-card-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem; }
+.tool-icon { font-size: 1.5rem; }
+.tool-name { font-size: 0.95rem; font-weight: 600; color: var(--navy); }
+.tool-stage { display: inline-block; font-size: 0.68rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 4px; background: var(--teal-light); color: var(--navy); margin-bottom: 0.6rem; }
+.tool-note { font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; }
+.tool-stars { color: var(--gold); font-size: 0.85rem; margin-top: 0.5rem; }
+.tool-contributor { font-size: 0.72rem; color: var(--mid-gray); margin-top: 0.4rem; }
+.skeleton { background: linear-gradient(90deg, #e8edf2 25%, #f5f7fa 50%, #e8edf2 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; height: 18px; margin-bottom: 0.5rem; }
+@keyframes shimmer { to { background-position: -200% 0; } }
 
-  /* ── LOADING skeleton ── */
-  .skeleton {
-    background: linear-gradient(90deg, #e8edf2 25%, #f5f7fa 50%, #e8edf2 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 6px; height: 18px; margin-bottom: 0.5rem;
-  }
-  @keyframes shimmer { to { background-position: -200% 0; } }
+/* ── SUBMIT ── */
+#submit { background: var(--navy); }
+#submit .section-title { color: #fff; }
+#submit .section-subtitle { color: rgba(255,255,255,0.5); }
+#submit .section-divider { background: linear-gradient(90deg, var(--gold), var(--teal)); }
+.tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab-btn { padding: 0.45rem 1.1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.6); font-size: 0.82rem; font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: all 0.2s; }
+.tab-btn.active, .tab-btn:hover { background: var(--teal); border-color: var(--teal); color: var(--navy); font-weight: 600; }
+.form-panel { display: none; }
+.form-panel.active { display: block; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.05em; }
+input, select, textarea { padding: 0.6rem 0.9rem; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; font-family: 'Noto Sans TC', sans-serif; font-size: 0.88rem; transition: border-color 0.2s; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--teal); background: rgba(78,205,196,0.08); }
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
+select option { background: var(--navy); }
+.star-select { display: flex; gap: 0.3rem; margin-top: 0.2rem; }
+.star-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: rgba(255,255,255,0.2); transition: color 0.15s; padding: 0; }
+.star-btn.selected { color: var(--gold); }
+.submit-btn { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.2rem; background: linear-gradient(135deg, var(--teal), #3ABDB5); color: var(--navy); font-weight: 700; font-size: 0.9rem; border: none; border-radius: 8px; padding: 0.7rem 1.8rem; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; transition: opacity 0.2s, transform 0.15s; }
+.submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.form-msg { margin-top: 0.8rem; font-size: 0.82rem; padding: 0.6rem 1rem; border-radius: 8px; display: none; }
+.form-msg.success { background: rgba(78,205,196,0.15); color: var(--teal); display: block; }
+.form-msg.error { background: rgba(244,162,97,0.15); color: var(--gold); display: block; }
 
-  /* ── SUBMIT FORM ── */
-  #submit { background: var(--navy); }
-  #submit .section-title { color: #fff; }
-  #submit .section-subtitle { color: rgba(255,255,255,0.5); }
-  #submit .section-divider { background: linear-gradient(90deg, var(--gold), var(--teal)); }
+/* ── FOOTER ── */
+footer { background: #111C30; color: rgba(255,255,255,0.4); text-align: center; padding: 1.5rem; font-size: 0.78rem; }
+footer a { color: var(--teal); text-decoration: none; }
 
-  .tabs {
-    display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;
-  }
-  .tab-btn {
-    padding: 0.45rem 1.1rem; border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: transparent; color: rgba(255,255,255,0.6);
-    font-size: 0.82rem; font-family: 'Noto Sans TC', sans-serif;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .tab-btn.active, .tab-btn:hover {
-    background: var(--teal); border-color: var(--teal); color: var(--navy);
-    font-weight: 600;
-  }
-
-  .form-panel { display: none; }
-  .form-panel.active { display: block; }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
-
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-group.full { grid-column: 1 / -1; }
-  label {
-    font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.7);
-    letter-spacing: 0.05em;
-  }
-  input, select, textarea {
-    padding: 0.6rem 0.9rem;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 8px; color: #fff;
-    font-family: 'Noto Sans TC', sans-serif; font-size: 0.88rem;
-    transition: border-color 0.2s;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline: none; border-color: var(--teal);
-    background: rgba(78,205,196,0.08);
-  }
-  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
-  select option { background: var(--navy); }
-  .star-select { display: flex; gap: 0.3rem; margin-top: 0.2rem; }
-  .star-btn {
-    background: none; border: none; font-size: 1.4rem;
-    cursor: pointer; color: rgba(255,255,255,0.2);
-    transition: color 0.15s; padding: 0;
-  }
-  .star-btn.selected { color: var(--gold); }
-
-  .submit-btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    margin-top: 1.2rem;
-    background: linear-gradient(135deg, var(--teal), #3ABDB5);
-    color: var(--navy); font-weight: 700; font-size: 0.9rem;
-    border: none; border-radius: 8px; padding: 0.7rem 1.8rem;
-    cursor: pointer; font-family: 'Noto Sans TC', sans-serif;
-    transition: opacity 0.2s, transform 0.15s;
-  }
-  .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-  .form-msg {
-    margin-top: 0.8rem; font-size: 0.82rem;
-    padding: 0.6rem 1rem; border-radius: 8px; display: none;
-  }
-  .form-msg.success { background: rgba(78,205,196,0.15); color: var(--teal); display: block; }
-  .form-msg.error { background: rgba(244,162,97,0.15); color: var(--gold); display: block; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: #111C30; color: rgba(255,255,255,0.4);
-    text-align: center; padding: 1.5rem;
-    font-size: 0.78rem;
-  }
-  footer a { color: var(--teal); text-decoration: none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 640px) {
-    nav { padding: 0 1rem; }
-    .nav-links { gap: 0.8rem; }
-    .hero { padding: 3.5rem 1.2rem 3rem; }
-    section { padding: 3rem 1.2rem; }
-    .pipeline-step { min-width: 110px; }
-  }
-
-  /* Scroll animation */
-  .fade-up {
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s;
-  }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  nav { padding: 0 1rem; }
+  .nav-links { gap: 0.7rem; }
+  .nav-links a { font-size: 0.74rem; }
+  .hero { padding: 3.5rem 1.2rem 3rem; }
+  section { padding: 3rem 1.2rem; }
+  .pipeline-step { min-width: 110px; }
+  .date-bar-wrap { display: none; }
+  .event-header { padding: 1rem; }
+}
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div id="announcement-bar">
+  <div class="announce-inner">
+    <span class="announce-label">公告</span>
+    <div class="announce-scroll">
+      <div class="announce-track" id="announceTrack"></div>
+    </div>
+    <button class="announce-close" onclick="document.getElementById('announcement-bar').style.display='none'">✕</button>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -411,9 +344,10 @@
   <div class="nav-links">
     <a href="#pipeline">研究流程</a>
     <a href="#members">成員</a>
-    <a href="#events">活動</a>
+    <a href="#events">活動紀錄</a>
+    <a href="#poll">時間調查</a>
     <a href="#tools">工具百科</a>
-    <a href="#submit">分享想法</a>
+    <a href="#submit">分享</a>
   </div>
 </nav>
 
@@ -423,18 +357,9 @@
   <h1>整合 <span>AI 數位工具</span><br>優化跨領域研究實務</h1>
   <p class="hero-sub">匯聚護理、長照、語聽、資管、休健等跨系所教師，共同探索 AI 工具如何改變學術研究的每個環節</p>
   <div class="hero-meta">
-    <div class="hero-meta-item">
-      <span class="num">9</span>
-      <span class="label">位社群成員</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="num">6</span>
-      <span class="label">次聚會活動</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="num">2026</span>
-      <span class="label">4 月 ─ 11 月</span>
-    </div>
+    <div class="hero-meta-item"><span class="num">9</span><span class="label">位社群成員</span></div>
+    <div class="hero-meta-item"><span class="num">6</span><span class="label">次聚會活動</span></div>
+    <div class="hero-meta-item"><span class="num">2026</span><span class="label">4 月 ─ 11 月</span></div>
   </div>
   <div class="sdg-badge">🎓 SDG 4 優質教育 &nbsp;|&nbsp; 國立臺北護理健康大學 健康科技學院</div>
 </section>
@@ -445,10 +370,9 @@
     <div class="section-divider"></div>
     <div class="section-title">AI 輔助學術研究流程</div>
     <p class="section-subtitle">點選各研究階段，查看適用工具與操作建議</p>
-
     <div class="pipeline-track" id="pipelineTrack"></div>
     <div class="pipeline-detail" id="pipelineDetail">
-      <p style="color:rgba(255,255,255,0.4); font-size:0.85rem;">← 點選上方任一研究階段查看詳情</p>
+      <p style="color:rgba(255,255,255,0.4);font-size:0.85rem;">← 點選上方任一研究階段查看詳情</p>
     </div>
   </div>
 </section>
@@ -459,21 +383,27 @@
     <div class="section-divider"></div>
     <div class="section-title">社群成員</div>
     <p class="section-subtitle">跨越五所院系的研究實踐者</p>
-    <div class="members-grid" id="membersGrid">
-      <!-- populated by JS -->
-    </div>
+    <div class="members-grid" id="membersGrid"></div>
   </div>
 </section>
 
-<!-- EVENTS -->
+<!-- EVENTS + RECORDS -->
 <section id="events">
   <div class="section-inner fade-up">
     <div class="section-divider"></div>
-    <div class="section-title">活動時程</div>
-    <p class="section-subtitle">六次系統化聚會，從研究架構到成果發表</p>
-    <div class="events-list" id="eventsList">
-      <!-- populated by JS -->
-    </div>
+    <div class="section-title">活動時程與聚會紀錄</div>
+    <p class="section-subtitle">點擊「查看紀錄」展開各次聚會摘要與重點</p>
+    <div class="events-list" id="eventsList"></div>
+  </div>
+</section>
+
+<!-- POLL -->
+<section id="poll">
+  <div class="section-inner fade-up">
+    <div class="section-divider"></div>
+    <div class="section-title">下次聚會時間調查</div>
+    <p class="section-subtitle">請勾選你方便出席的日期，票數即時更新</p>
+    <div id="pollContent"><p class="poll-loading">載入中…</p></div>
   </div>
 </section>
 
@@ -484,25 +414,11 @@
     <div class="section-title">工具百科</div>
     <p class="section-subtitle">成員親身試用、整理的 AI 工具心得 — 持續更新中</p>
     <div class="tools-grid" id="toolsGrid">
-      <div class="tool-card">
-        <div class="skeleton" style="width:60%; height:14px;"></div>
-        <div class="skeleton" style="width:40%; height:10px; margin-top:0.8rem;"></div>
-        <div class="skeleton" style="height:40px; margin-top:0.8rem;"></div>
-      </div>
-      <div class="tool-card">
-        <div class="skeleton" style="width:55%; height:14px;"></div>
-        <div class="skeleton" style="width:35%; height:10px; margin-top:0.8rem;"></div>
-        <div class="skeleton" style="height:40px; margin-top:0.8rem;"></div>
-      </div>
-      <div class="tool-card">
-        <div class="skeleton" style="width:65%; height:14px;"></div>
-        <div class="skeleton" style="width:45%; height:10px; margin-top:0.8rem;"></div>
-        <div class="skeleton" style="height:40px; margin-top:0.8rem;"></div>
-      </div>
+      <div class="tool-card"><div class="skeleton" style="width:60%;height:14px;"></div><div class="skeleton" style="width:40%;height:10px;margin-top:.8rem;"></div><div class="skeleton" style="height:40px;margin-top:.8rem;"></div></div>
+      <div class="tool-card"><div class="skeleton" style="width:55%;height:14px;"></div><div class="skeleton" style="width:35%;height:10px;margin-top:.8rem;"></div><div class="skeleton" style="height:40px;margin-top:.8rem;"></div></div>
+      <div class="tool-card"><div class="skeleton" style="width:65%;height:14px;"></div><div class="skeleton" style="width:45%;height:10px;margin-top:.8rem;"></div><div class="skeleton" style="height:40px;margin-top:.8rem;"></div></div>
     </div>
-    <p id="toolsEmpty" style="display:none; font-size:0.88rem; color:var(--mid-gray);">
-      目前還沒有工具分享 — 成為第一位貢獻者吧！👇
-    </p>
+    <p id="toolsEmpty" style="display:none;font-size:.88rem;color:var(--mid-gray);">目前還沒有工具分享 — 成為第一位貢獻者吧！👇</p>
   </div>
 </section>
 
@@ -512,81 +428,37 @@
     <div class="section-divider"></div>
     <div class="section-title">分享你的想法與工具</div>
     <p class="section-subtitle">選擇想貢獻的類型，直接填寫送出</p>
-
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('tool')">🛠 分享 AI 工具</button>
-      <button class="tab-btn" onclick="switchTab('idea')">💡 分享想法 / 意見</button>
+      <button class="tab-btn active" onclick="switchTab('tool',this)">🛠 分享 AI 工具</button>
+      <button class="tab-btn" onclick="switchTab('idea',this)">💡 分享想法 / 意見</button>
     </div>
-
     <!-- Tool form -->
     <div class="form-panel active" id="panel-tool">
       <div class="form-grid">
-        <div class="form-group">
-          <label>工具名稱 *</label>
-          <input type="text" id="tool-name" placeholder="例：SciSpace、NotebookLM">
+        <div class="form-group"><label>工具名稱 *</label><input type="text" id="tool-name" placeholder="例：SciSpace、NotebookLM"></div>
+        <div class="form-group"><label>適用研究階段 *</label>
+          <select id="tool-stage"><option value="">請選擇</option><option>選題與構思</option><option>PICO / 問題擬定</option><option>文獻搜尋與管理</option><option>數據整理與統計</option><option>論文撰寫與修潤</option><option>投稿與審稿</option><option>其他 / 通用</option></select>
         </div>
-        <div class="form-group">
-          <label>適用研究階段 *</label>
-          <select id="tool-stage">
-            <option value="">請選擇</option>
-            <option>選題與構思</option>
-            <option>PICO / 問題擬定</option>
-            <option>文獻搜尋與管理</option>
-            <option>數據整理與統計</option>
-            <option>論文撰寫與修潤</option>
-            <option>投稿與審稿</option>
-            <option>其他 / 通用</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>推薦評分</label>
+        <div class="form-group"><label>推薦評分</label>
           <div class="star-select" id="star-rating">
-            <button class="star-btn" data-val="1" onclick="setStars(1)">★</button>
-            <button class="star-btn" data-val="2" onclick="setStars(2)">★</button>
-            <button class="star-btn" data-val="3" onclick="setStars(3)">★</button>
-            <button class="star-btn" data-val="4" onclick="setStars(4)">★</button>
-            <button class="star-btn" data-val="5" onclick="setStars(5)">★</button>
+            <button class="star-btn" data-val="1" onclick="setStars(1)">★</button><button class="star-btn" data-val="2" onclick="setStars(2)">★</button><button class="star-btn" data-val="3" onclick="setStars(3)">★</button><button class="star-btn" data-val="4" onclick="setStars(4)">★</button><button class="star-btn" data-val="5" onclick="setStars(5)">★</button>
           </div>
         </div>
-        <div class="form-group">
-          <label>你的名字（選填）</label>
-          <input type="text" id="tool-author" placeholder="張老師 / 匿名">
-        </div>
-        <div class="form-group full">
-          <label>使用心得 / 操作說明 *</label>
-          <textarea id="tool-note" rows="4" placeholder="分享使用體驗、實際用在哪個研究步驟、有什麼優缺點..."></textarea>
-        </div>
-        <div class="form-group full">
-          <label>工具連結（選填）</label>
-          <input type="url" id="tool-url" placeholder="https://...">
-        </div>
+        <div class="form-group"><label>你的名字（選填）</label><input type="text" id="tool-author" placeholder="張老師 / 匿名"></div>
+        <div class="form-group full"><label>使用心得 / 操作說明 *</label><textarea id="tool-note" rows="4" placeholder="分享使用體驗、實際用在哪個研究步驟、有什麼優缺點..."></textarea></div>
+        <div class="form-group full"><label>工具連結（選填）</label><input type="url" id="tool-url" placeholder="https://..."></div>
       </div>
       <button class="submit-btn" id="btn-tool" onclick="submitTool()">✦ 送出工具分享</button>
       <div class="form-msg" id="msg-tool"></div>
     </div>
-
     <!-- Idea form -->
     <div class="form-panel" id="panel-idea">
       <div class="form-grid">
-        <div class="form-group">
-          <label>類型 *</label>
-          <select id="idea-type">
-            <option value="">請選擇</option>
-            <option>教學應用想法</option>
-            <option>研究流程建議</option>
-            <option>工具使用問題</option>
-            <option>活動/主題建議</option>
-            <option>其他</option>
-          </select>
+        <div class="form-group"><label>類型 *</label>
+          <select id="idea-type"><option value="">請選擇</option><option>教學應用想法</option><option>研究流程建議</option><option>工具使用問題</option><option>活動/主題建議</option><option>其他</option></select>
         </div>
-        <div class="form-group">
-          <label>你的名字（選填）</label>
-          <input type="text" id="idea-author" placeholder="張老師 / 匿名">
-        </div>
-        <div class="form-group full">
-          <label>想法內容 *</label>
-          <textarea id="idea-content" rows="5" placeholder="有任何想分享的想法、建議、或問題都歡迎..."></textarea>
-        </div>
+        <div class="form-group"><label>你的名字（選填）</label><input type="text" id="idea-author" placeholder="張老師 / 匿名"></div>
+        <div class="form-group full"><label>想法內容 *</label><textarea id="idea-content" rows="5" placeholder="有任何想分享的想法、建議、或問題都歡迎..."></textarea></div>
       </div>
       <button class="submit-btn" id="btn-idea" onclick="submitIdea()">✦ 送出想法</button>
       <div class="form-msg" id="msg-idea"></div>
@@ -594,145 +466,105 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>
-    整合 AI 數位工具優化跨領域研究實務社群 · 國立臺北護理健康大學 健康科技學院 · 115 年度<br>
-    召集人：張育通 助理教授 &nbsp;·&nbsp;
-    <a href="mailto:yutung@ntunhs.edu.tw">yutung@ntunhs.edu.tw</a>
-  </p>
+  <p>整合 AI 數位工具優化跨領域研究實務社群 · 國立臺北護理健康大學 健康科技學院 · 115 年度<br>
+  召集人：張育通 助理教授 &nbsp;·&nbsp; <a href="mailto:yutung@ntunhs.edu.tw">yutung@ntunhs.edu.tw</a></p>
 </footer>
 
 <script>
 // ══ CONFIG ══
-// 替換為你的 Google Apps Script Web App URL
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbzM1FB_vxWcfaxnQ5_BlD4dP5B-i5YRyh1C2bdw3ISAwhZDzB2-pjHlIa79w1ce9nwZ/exec';
+const GAS_URL = 'YOUR_GAS_WEB_APP_URL';
 
 // ══ PIPELINE DATA ══
 const PIPELINE_STEPS = [
-  {
-    icon: '🔍', label: '選題\n與構思',
-    title: '選題與研究構思',
-    desc: '從模糊的興趣出發，利用 AI 協助釐清研究方向、分析研究缺口，快速建立初步框架。',
-    tools: ['ChatGPT / Claude（對話式發想）', 'Perplexity（即時文獻預覽）', 'ResearchRabbit（文獻地圖）']
-  },
-  {
-    icon: '🎯', label: 'PICO\n問題擬定',
-    title: 'PICO / 問題結構化',
-    desc: '將研究問題拆解為 PICO 框架，AI 協助關鍵詞擴展與 MeSH 詞彙對應。',
-    tools: ['Claude（PICO 對話引導）', 'PubMed MeSH（詞彙擴展）', 'PICOT Maker（結構化工具）']
-  },
-  {
-    icon: '📚', label: '文獻\n搜尋',
-    title: '文獻搜尋與管理',
-    desc: '自動整理文獻、生成摘要表格，大幅縮短過去需要數週的文獻回顧流程。',
-    tools: ['SciSpace（文獻 AI 摘要）', 'NotebookLM（個人知識庫）', 'Zotero + GPT4Zotero']
-  },
-  {
-    icon: '📊', label: '數據\n整理',
-    title: '數據整理與統計分析',
-    desc: '自動判斷適用統計方法，產出符合 APA 格式的圖表，降低統計分析的技術門檻。',
-    tools: ['Python + Gemini API（自動統計）', 'Julius AI（對話式數據分析）', 'JASP（免費統計軟體）']
-  },
-  {
-    icon: '✍️', label: '論文\n撰寫',
-    title: '論文撰寫與語言修潤',
-    desc: '從草稿結構檢視到英文潤稿，AI 工具協助維持學術論述嚴謹性與語言一致性。',
-    tools: ['Claude（結構分析）', 'Grammarly / DeepL Write（潤稿）', 'Writefull（學術語言）']
-  },
-  {
-    icon: '📮', label: '投稿\n準備',
-    title: '期刊匹配與投稿策略',
-    desc: '分析稿件與期刊的適配度，模擬審查意見並優化回覆策略。',
-    tools: ['Journal Finder（Elsevier）', 'Edanz（期刊選擇 AI）', 'Claude（審稿回覆模擬）']
-  }
+  { icon:'🔍', label:'選題\n與構思', title:'選題與研究構思', desc:'從模糊的興趣出發，利用 AI 協助釐清研究方向、分析研究缺口，快速建立初步框架。', tools:['ChatGPT / Claude（對話式發想）','Perplexity（即時文獻預覽）','ResearchRabbit（文獻地圖）'] },
+  { icon:'🎯', label:'PICO\n問題擬定', title:'PICO / 問題結構化', desc:'將研究問題拆解為 PICO 框架，AI 協助關鍵詞擴展與 MeSH 詞彙對應。', tools:['Claude（PICO 對話引導）','PubMed MeSH（詞彙擴展）','PICOT Maker（結構化工具）'] },
+  { icon:'📚', label:'文獻\n搜尋', title:'文獻搜尋與管理', desc:'自動整理文獻、生成摘要表格，大幅縮短過去需要數週的文獻回顧流程。', tools:['SciSpace（文獻 AI 摘要）','NotebookLM（個人知識庫）','Zotero + GPT4Zotero'] },
+  { icon:'📊', label:'數據\n整理', title:'數據整理與統計分析', desc:'自動判斷適用統計方法，產出符合 APA 格式的圖表，降低統計分析的技術門檻。', tools:['Python + Gemini API（自動統計）','Julius AI（對話式數據分析）','JASP（免費統計軟體）'] },
+  { icon:'✍️', label:'論文\n撰寫', title:'論文撰寫與語言修潤', desc:'從草稿結構檢視到英文潤稿，AI 工具協助維持學術論述嚴謹性與語言一致性。', tools:['Claude（結構分析）','Grammarly / DeepL Write（潤稿）','Writefull（學術語言）'] },
+  { icon:'📮', label:'投稿\n準備', title:'期刊匹配與投稿策略', desc:'分析稿件與期刊的適配度，模擬審查意見並優化回覆策略。', tools:['Journal Finder（Elsevier）','Edanz（期刊選擇 AI）','Claude（審稿回覆模擬）'] }
 ];
 
-// ══ MEMBERS DATA ══
+// ══ MEMBERS ══
 const MEMBERS = [
-  { name: '張育通', dept: '健康科技學院', role: '助理教授（召集人）', org: 'internal' },
-  { name: '陳巧珊', dept: '資訊管理系', role: '助理教授', org: 'internal' },
-  { name: '張家瑜', dept: '長期照護系所', role: '助理教授級專案計畫教學人員', org: 'internal' },
-  { name: '施堯啟', dept: '長期照護系所', role: '助理教授', org: 'internal' },
-  { name: '陳郁雯', dept: '語言治療與聽力學系', role: '助理教授', org: 'internal' },
-  { name: '高婕', dept: '語言治療與聽力學系', role: '助理教授', org: 'internal' },
-  { name: '葉昱辰', dept: '休閒產業與健康促進系', role: '助理教授級專案計畫教學人員', org: 'internal' },
-  { name: '鄭韻如', dept: '馬偕醫學大學 長期照護研究所', role: '助理教授', org: 'external' },
-  { name: '張斯蘭', dept: '馬偕醫學大學 長期照護研究所', role: '助理教授', org: 'external' },
-  { name: '蕭力愷', dept: '臺灣警察專科學校', role: '助理教授', org: 'external' },
+  { name:'張育通', dept:'健康科技學院', role:'助理教授（召集人）', org:'internal' },
+  { name:'陳巧珊', dept:'資訊管理系', role:'助理教授', org:'internal' },
+  { name:'張家瑜', dept:'長期照護系所', role:'助理教授級專案計畫教學人員', org:'internal' },
+  { name:'施堯啟', dept:'長期照護系所', role:'助理教授', org:'internal' },
+  { name:'陳郁雯', dept:'語言治療與聽力學系', role:'助理教授', org:'internal' },
+  { name:'高婕', dept:'語言治療與聽力學系', role:'助理教授', org:'internal' },
+  { name:'葉昱辰', dept:'休閒產業與健康促進系', role:'助理教授級專案計畫教學人員', org:'internal' },
+  { name:'鄭韻如', dept:'馬偕醫學大學 長期照護研究所', role:'助理教授', org:'external' },
+  { name:'張斯蘭', dept:'馬偕醫學大學 長期照護研究所', role:'助理教授', org:'external' },
+  { name:'蕭力愷', dept:'臺灣警察專科學校', role:'助理教授', org:'external' },
 ];
 
-// ══ EVENTS DATA ══
-const EVENTS = [
-  { date: '2026/4/28', title: '第一次成長社群聚會', desc: '透過 AI 工具輔助建立研究架構並優化跨學科背景的邏輯連貫性', status: 'done' },
-  { date: '2026/6/23', title: '第二次成長社群聚會', desc: '探討數位工具在質性資料編碼或量化數據整理階段的自動化應用', status: 'upcoming' },
-  { date: '2026/8/25', title: '第三次成長社群聚會', desc: '實作 AI 工具進行論文草稿的結構檢視與符合國際規範的語言修飾', status: 'upcoming' },
-  { date: '2026/10/6', title: '第四次成長社群聚會（公開）', desc: '邀請校外專家進行專題講座，分享數位工具在國際研究領域的趨勢', status: 'open' },
-  { date: '2026/11/3', title: '第五次成長社群聚會', desc: '利用數位工具分析期刊匹配度並模擬審查意見之邏輯回應與修正', status: 'upcoming' },
-  { date: '2026/11/24', title: '第六次成長社群聚會', desc: '彙整結案報告與成果，製作 AI 學術研究工具應用指引手冊', status: 'upcoming' },
+// ══ EVENTS (含紀錄欄位，從 GAS 讀取後合併) ══
+const EVENTS_STATIC = [
+  { date:'2026/4/28', title:'第一次成長社群聚會', desc:'透過 AI 工具輔助建立研究架構並優化跨學科背景的邏輯連貫性', status:'done', recordKey:'event_1' },
+  { date:'2026/6/23', title:'第二次成長社群聚會', desc:'探討數位工具在質性資料編碼或量化數據整理階段的自動化應用', status:'upcoming', recordKey:'event_2' },
+  { date:'2026/8/25', title:'第三次成長社群聚會', desc:'實作 AI 工具進行論文草稿的結構檢視與符合國際規範的語言修飾', status:'upcoming', recordKey:'event_3' },
+  { date:'2026/10/6', title:'第四次成長社群聚會（公開）', desc:'邀請校外專家進行專題講座，分享數位工具在國際研究領域的趨勢', status:'open', recordKey:'event_4' },
+  { date:'2026/11/3', title:'第五次成長社群聚會', desc:'利用數位工具分析期刊匹配度並模擬審查意見之邏輯回應與修正', status:'upcoming', recordKey:'event_5' },
+  { date:'2026/11/24', title:'第六次成長社群聚會', desc:'彙整結案報告與成果，製作 AI 學術研究工具應用指引手冊', status:'upcoming', recordKey:'event_6' },
 ];
 
 // ══ STATE ══
 let currentStar = 0;
+let pollData = null; // { question, hint, round, options:[{id,date,note,voters:[]}], active }
+let selectedDates = new Set();
+let pollVoterName = '';
 
-// ══ INIT PIPELINE ══
+// ══════════════════════════════════════
+// PIPELINE
+// ══════════════════════════════════════
 function initPipeline() {
   const track = document.getElementById('pipelineTrack');
   PIPELINE_STEPS.forEach((step, i) => {
     const el = document.createElement('div');
     el.className = 'pipeline-step';
-    el.innerHTML = `
-      <div class="step-circle">${step.icon}</div>
-      <div class="step-label">${step.label}</div>
-    `;
+    el.innerHTML = `<div class="step-circle">${step.icon}</div><div class="step-label">${step.label}</div>`;
     el.onclick = () => showPipelineDetail(i, el);
     track.appendChild(el);
   });
 }
-
 function showPipelineDetail(idx, el) {
   document.querySelectorAll('.pipeline-step').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
   const step = PIPELINE_STEPS[idx];
-  const detail = document.getElementById('pipelineDetail');
-  detail.innerHTML = `
-    <h3>${step.icon} ${step.title}</h3>
-    <p>${step.desc}</p>
-    <div class="tool-chips">
-      ${step.tools.map(t => `<span class="tool-chip">✦ ${t}</span>`).join('')}
-    </div>
-  `;
+  document.getElementById('pipelineDetail').innerHTML = `
+    <h3>${step.icon} ${step.title}</h3><p>${step.desc}</p>
+    <div class="tool-chips">${step.tools.map(t=>`<span class="tool-chip">✦ ${t}</span>`).join('')}</div>`;
 }
 
-// ══ INIT MEMBERS ══
+// ══════════════════════════════════════
+// MEMBERS
+// ══════════════════════════════════════
 function initMembers() {
-  const grid = document.getElementById('membersGrid');
-  grid.innerHTML = MEMBERS.map(m => `
+  document.getElementById('membersGrid').innerHTML = MEMBERS.map(m => `
     <div class="member-card">
       <div class="member-avatar">${m.name[0]}</div>
       <div class="member-name">${m.name}</div>
       <div class="member-dept">${m.role}</div>
-      <div class="member-dept" style="font-size:0.72rem; margin-top:0.15rem;">${m.dept}</div>
-      <span class="member-org ${m.org === 'internal' ? 'org-internal' : 'org-external'}">
-        ${m.org === 'internal' ? '校內' : '校外'}
-      </span>
-    </div>
-  `).join('');
+      <div class="member-dept" style="font-size:.72rem;margin-top:.15rem;">${m.dept}</div>
+      <span class="member-org ${m.org==='internal'?'org-internal':'org-external'}">${m.org==='internal'?'校內':'校外'}</span>
+    </div>`).join('');
 }
 
-// ══ INIT EVENTS ══
-function initEvents() {
-  const list = document.getElementById('eventsList');
-  const statusMap = {
-    done: ['status-done', '已完成'],
-    upcoming: ['status-upcoming', '即將舉行'],
-    open: ['status-open', '公開場次']
-  };
-  list.innerHTML = EVENTS.map(ev => {
+// ══════════════════════════════════════
+// EVENTS + RECORDS
+// ══════════════════════════════════════
+function initEvents(records = {}) {
+  const statusMap = { done:['status-done','已完成'], upcoming:['status-upcoming','即將舉行'], open:['status-open','公開場次'] };
+  document.getElementById('eventsList').innerHTML = EVENTS_STATIC.map((ev, idx) => {
     const d = ev.date.split('/');
     const [cls, label] = statusMap[ev.status];
+    const rec = records[ev.recordKey];
+    const hasRecord = rec && (rec.summary || rec.tools || rec.highlight);
+    const showToggle = ev.status === 'done';
     return `
-      <div class="event-item">
+    <div class="event-item" id="event-item-${idx}">
+      <div class="event-header" onclick="${showToggle ? `toggleRecord(${idx})` : ''}">
         <div class="event-date">
           <div class="month">${d[1]}月</div>
           <div class="day">${parseInt(d[2])}</div>
@@ -741,77 +573,185 @@ function initEvents() {
           <div class="event-title">${ev.title}</div>
           <div class="event-desc">${ev.desc}</div>
         </div>
-        <span class="event-status ${cls}">${label}</span>
+        <div class="event-right">
+          <span class="event-status ${cls}">${label}</span>
+          ${showToggle ? `<button class="event-toggle" id="toggle-btn-${idx}">查看紀錄 ▾</button>` : ''}
+        </div>
       </div>
-    `;
+      <div class="event-record" id="record-${idx}">
+        ${hasRecord ? renderRecord(rec) : '<p class="record-empty">紀錄整理中，敬請期待。</p>'}
+      </div>
+    </div>`;
   }).join('');
 }
 
-// ══ LOAD TOOLS FROM GOOGLE SHEETS ══
-async function loadTools() {
-  if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL') {
-    showDefaultTools();
+function renderRecord(rec) {
+  let html = '';
+  if (rec.participants || rec.venue) {
+    html += `<div class="record-meta">`;
+    if (rec.participants) html += `<span class="record-badge">👥 出席 ${rec.participants} 人</span>`;
+    if (rec.venue) html += `<span class="record-badge">📍 ${rec.venue}</span>`;
+    if (rec.date_actual) html += `<span class="record-badge">🗓 ${rec.date_actual}</span>`;
+    html += `</div>`;
+  }
+  if (rec.summary) {
+    html += `<div class="record-section-title">本次摘要</div><div class="record-body">${rec.summary}</div>`;
+  }
+  if (rec.highlight) {
+    html += `<div class="record-section-title">重點筆記</div><div class="record-body">${rec.highlight}</div>`;
+  }
+  if (rec.tools) {
+    const toolList = rec.tools.split('、').map(t => t.trim()).filter(Boolean);
+    html += `<div class="record-section-title">本次使用工具</div><div class="record-tools">${toolList.map(t=>`<span class="record-tool-chip">${t}</span>`).join('')}</div>`;
+  }
+  if (rec.link) {
+    html += `<a class="record-link" href="${rec.link}" target="_blank">📎 簡報 / 資料連結 →</a>`;
+  }
+  return html;
+}
+
+function toggleRecord(idx) {
+  const rec = document.getElementById(`record-${idx}`);
+  const btn = document.getElementById(`toggle-btn-${idx}`);
+  const isOpen = rec.classList.toggle('open');
+  if (btn) btn.textContent = isOpen ? '收起 ▴' : '查看紀錄 ▾';
+}
+
+// ══════════════════════════════════════
+// ANNOUNCEMENT
+// ══════════════════════════════════════
+function renderAnnouncements(items) {
+  if (!items || items.length === 0) return;
+  const bar = document.getElementById('announcement-bar');
+  const track = document.getElementById('announceTrack');
+  // 跑馬燈：複製兩份讓動畫無縫
+  const html = items.map(a => `<span class="announce-item">📢 ${a.text}${a.link ? ` <a href="${a.link}" target="_blank">→ 了解更多</a>` : ''}</span>`).join('');
+  track.innerHTML = html + html; // 重複以無縫滾動
+  bar.classList.add('visible');
+}
+
+// ══════════════════════════════════════
+// POLL
+// ══════════════════════════════════════
+function renderPoll(data) {
+  pollData = data;
+  const container = document.getElementById('pollContent');
+  if (!data || !data.active) {
+    container.innerHTML = '<p class="poll-closed">目前沒有進行中的時間調查，下次調查開放時將在公告欄通知。</p>';
     return;
   }
+  const maxVotes = Math.max(1, ...data.options.map(o => (o.voters || []).length));
+  container.innerHTML = `
+    <div class="poll-title-block">
+      <div class="poll-round">${data.round || '時間調查'}</div>
+      <div class="poll-question">${data.question}</div>
+      ${data.hint ? `<div class="poll-hint">${data.hint}</div>` : ''}
+    </div>
+    <div class="poll-name-row">
+      <div class="form-group">
+        <label>你的名字（必填）</label>
+        <input type="text" id="poll-voter-name" placeholder="張老師" oninput="pollVoterName=this.value.trim()">
+      </div>
+    </div>
+    <div class="date-options" id="dateOptions">
+      ${data.options.map(opt => {
+        const count = (opt.voters || []).length;
+        const pct = Math.round((count / maxVotes) * 100);
+        return `
+        <div class="date-option" id="opt-${opt.id}" onclick="toggleDate('${opt.id}')">
+          <input type="checkbox" id="chk-${opt.id}">
+          <div class="date-check">✓</div>
+          <div class="date-label">
+            <div class="date-main">${opt.date}</div>
+            ${opt.note ? `<div class="date-note">${opt.note}</div>` : ''}
+          </div>
+          <div class="date-bar-wrap">
+            <div class="date-bar-bg"><div class="date-bar-fill" style="width:${pct}%"></div></div>
+            <div class="date-count">${count} 票</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="poll-submit-row">
+      <button class="poll-submit-btn" id="pollSubmitBtn" onclick="submitPoll()">✦ 送出我的時間</button>
+      <span class="poll-msg" id="pollMsg" style="display:none;"></span>
+    </div>`;
+}
+
+function toggleDate(id) {
+  const el = document.getElementById(`opt-${id}`);
+  if (selectedDates.has(id)) { selectedDates.delete(id); el.classList.remove('selected'); }
+  else { selectedDates.add(id); el.classList.add('selected'); }
+}
+
+async function submitPoll() {
+  const name = document.getElementById('poll-voter-name')?.value.trim();
+  const msg = document.getElementById('pollMsg');
+  const btn = document.getElementById('pollSubmitBtn');
+  if (!name) { showPollMsg('請先填寫你的名字。', 'error'); return; }
+  if (selectedDates.size === 0) { showPollMsg('請至少勾選一個方便的日期。', 'error'); return; }
+  btn.disabled = true; btn.textContent = '送出中…';
   try {
-    const res = await fetch(`${GAS_URL}?action=getTools`);
-    const data = await res.json();
-    renderTools(data);
-  } catch (e) {
-    showDefaultTools();
+    if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL') throw new Error('no-gas');
+    await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'addPollVote', pollId: pollData.id, voter: name, dates: [...selectedDates] }) });
+    showPollMsg(`✓ 已記錄你的時間！感謝 ${name} 老師填寫。`, 'success');
+    btn.textContent = '已送出';
+  } catch(e) {
+    showPollMsg(e.message === 'no-gas' ? '⚠ 尚未設定後端 GAS_URL。' : '送出失敗，請稍後再試。', 'error');
+    btn.disabled = false; btn.textContent = '✦ 送出我的時間';
   }
 }
 
-function showDefaultTools() {
-  const grid = document.getElementById('toolsGrid');
-  const defaults = [
-    { icon: '📓', name: 'NotebookLM', stage: '文獻搜尋與管理', note: '將多份文獻 PDF 上傳後，可對文獻提問、自動生成摘要、製作 Podcast 形式的知識整理。', stars: 5, author: '張育通' },
-    { icon: '🔬', name: 'SciSpace', stage: '文獻搜尋與管理', note: '自動生成文獻整理表格，支援 PICO 欄位拆解。兩天內可完成過去需要數週的文獻回顧。', stars: 4, author: '社群整理' },
-    { icon: '🤖', name: 'Claude', stage: '投稿準備', note: '程式力穩定，用於 Bug 除錯與工具開發。論文結構分析與審查意見模擬也很實用。', stars: 5, author: '張育通' },
-  ];
-  renderTools(defaults);
+function showPollMsg(text, type) {
+  const el = document.getElementById('pollMsg');
+  el.textContent = text; el.className = `poll-msg ${type}`; el.style.display = 'inline-block';
 }
 
+// ══════════════════════════════════════
+// TOOLS
+// ══════════════════════════════════════
+async function loadTools() {
+  if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL') { showDefaultTools(); return; }
+  try {
+    const res = await fetch(`${GAS_URL}?action=getTools`);
+    renderTools(await res.json());
+  } catch(e) { showDefaultTools(); }
+}
+function showDefaultTools() {
+  renderTools([
+    { icon:'📓', name:'NotebookLM', stage:'文獻搜尋與管理', note:'將多份文獻 PDF 上傳後，可對文獻提問、自動生成摘要。兩天內可完成過去需數週的文獻回顧。', stars:5, author:'張育通' },
+    { icon:'🔬', name:'SciSpace', stage:'文獻搜尋與管理', note:'自動生成文獻整理表格，支援 PICO 欄位拆解，大幅節省文獻整理時間。', stars:4, author:'社群整理' },
+    { icon:'🤖', name:'Claude', stage:'投稿準備', note:'論文結構分析與審查意見模擬很實用，程式開發 Bug 除錯也相當穩定。', stars:5, author:'張育通' },
+  ]);
+}
 function renderTools(tools) {
   const grid = document.getElementById('toolsGrid');
   const empty = document.getElementById('toolsEmpty');
-  if (!tools || tools.length === 0) {
-    grid.innerHTML = '';
-    empty.style.display = 'block';
-    return;
-  }
+  if (!tools || tools.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
   empty.style.display = 'none';
   grid.innerHTML = tools.map(t => `
     <div class="tool-card">
-      <div class="tool-card-header">
-        <span class="tool-icon">${t.icon || '🛠'}</span>
-        <span class="tool-name">${t.name}</span>
-      </div>
+      <div class="tool-card-header"><span class="tool-icon">${t.icon||'🛠'}</span><span class="tool-name">${t.name}</span></div>
       <span class="tool-stage">${t.stage}</span>
       <div class="tool-note">${t.note}</div>
-      <div class="tool-stars">${'★'.repeat(t.stars || 0)}${'☆'.repeat(5 - (t.stars || 0))}</div>
-      ${t.author ? `<div class="tool-contributor">分享者：${t.author}</div>` : ''}
-    </div>
-  `).join('');
+      <div class="tool-stars">${'★'.repeat(t.stars||0)}${'☆'.repeat(5-(t.stars||0))}</div>
+      ${t.author?`<div class="tool-contributor">分享者：${t.author}</div>`:''}
+    </div>`).join('');
 }
 
-// ══ TABS ══
-function switchTab(type) {
+// ══════════════════════════════════════
+// FORMS
+// ══════════════════════════════════════
+function switchTab(type, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
   document.getElementById(`panel-${type}`).classList.add('active');
 }
-
-// ══ STARS ══
 function setStars(val) {
   currentStar = val;
-  document.querySelectorAll('.star-btn').forEach(b => {
-    b.classList.toggle('selected', parseInt(b.dataset.val) <= val);
-  });
+  document.querySelectorAll('.star-btn').forEach(b => b.classList.toggle('selected', parseInt(b.dataset.val) <= val));
 }
-
-// ══ SUBMIT TOOL ══
 async function submitTool() {
   const name = document.getElementById('tool-name').value.trim();
   const stage = document.getElementById('tool-stage').value;
@@ -819,85 +759,105 @@ async function submitTool() {
   const author = document.getElementById('tool-author').value.trim() || '匿名';
   const url = document.getElementById('tool-url').value.trim();
   const msg = document.getElementById('msg-tool');
-
-  if (!name || !stage || !note) {
-    msg.className = 'form-msg error';
-    msg.textContent = '請填寫工具名稱、適用階段與使用心得。';
-    return;
-  }
-
+  if (!name || !stage || !note) { msg.className='form-msg error'; msg.textContent='請填寫工具名稱、適用階段與使用心得。'; return; }
   const btn = document.getElementById('btn-tool');
   btn.disabled = true; btn.textContent = '送出中…';
-
-  const payload = { action: 'addTool', name, stage, note, author, url, stars: currentStar, ts: new Date().toISOString() };
-
   try {
     if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL') throw new Error('no-gas');
-    await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
-    msg.className = 'form-msg success';
-    msg.textContent = '✓ 工具分享成功！感謝你的貢獻，稍後將出現在工具百科中。';
-    document.getElementById('tool-name').value = '';
-    document.getElementById('tool-stage').value = '';
-    document.getElementById('tool-note').value = '';
-    document.getElementById('tool-url').value = '';
-    currentStar = 0;
-    document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('selected'));
-  } catch (e) {
-    msg.className = 'form-msg error';
-    msg.textContent = e.message === 'no-gas'
-      ? '⚠ 尚未設定 Google Sheets 後端，請先更新 GAS_URL 設定。'
-      : '送出失敗，請稍後再試或直接聯絡召集人。';
+    await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'addTool', name, stage, note, author, url, stars: currentStar }) });
+    msg.className='form-msg success'; msg.textContent='✓ 工具分享成功！感謝貢獻，稍後將出現在工具百科中。';
+    ['tool-name','tool-stage','tool-note','tool-url'].forEach(id => document.getElementById(id).value='');
+    currentStar = 0; document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('selected'));
+  } catch(e) {
+    msg.className='form-msg error';
+    msg.textContent = e.message==='no-gas' ? '⚠ 尚未設定後端 GAS_URL。' : '送出失敗，請稍後再試。';
   }
-
   btn.disabled = false; btn.textContent = '✦ 送出工具分享';
 }
-
-// ══ SUBMIT IDEA ══
 async function submitIdea() {
   const type = document.getElementById('idea-type').value;
   const content = document.getElementById('idea-content').value.trim();
   const author = document.getElementById('idea-author').value.trim() || '匿名';
   const msg = document.getElementById('msg-idea');
-
-  if (!type || !content) {
-    msg.className = 'form-msg error';
-    msg.textContent = '請選擇類型並填寫想法內容。';
-    return;
-  }
-
+  if (!type || !content) { msg.className='form-msg error'; msg.textContent='請選擇類型並填寫想法內容。'; return; }
   const btn = document.getElementById('btn-idea');
   btn.disabled = true; btn.textContent = '送出中…';
-
-  const payload = { action: 'addIdea', type, content, author, ts: new Date().toISOString() };
-
   try {
     if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL') throw new Error('no-gas');
-    await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
-    msg.className = 'form-msg success';
-    msg.textContent = '✓ 想法已送出！感謝你的分享。';
-    document.getElementById('idea-content').value = '';
-    document.getElementById('idea-type').value = '';
-  } catch (e) {
-    msg.className = 'form-msg error';
-    msg.textContent = e.message === 'no-gas'
-      ? '⚠ 尚未設定 Google Sheets 後端，請先更新 GAS_URL 設定。'
-      : '送出失敗，請稍後再試或直接聯絡召集人。';
+    await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'addIdea', type, content, author }) });
+    msg.className='form-msg success'; msg.textContent='✓ 想法已送出！感謝分享。';
+    document.getElementById('idea-content').value=''; document.getElementById('idea-type').value='';
+  } catch(e) {
+    msg.className='form-msg error';
+    msg.textContent = e.message==='no-gas' ? '⚠ 尚未設定後端 GAS_URL。' : '送出失敗，請稍後再試。';
   }
-
   btn.disabled = false; btn.textContent = '✦ 送出想法';
 }
 
-// ══ SCROLL ANIMATION ══
+// ══════════════════════════════════════
+// MASTER LOAD (從 GAS 取全部動態資料)
+// ══════════════════════════════════════
+async function loadAll() {
+  if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL') {
+    // 示範模式：顯示預設資料
+    initEvents({
+      event_1: {
+        participants: '8', venue: '線上 Google Meet', date_actual: '2026/4/28',
+        summary: '本次聚會由召集人張育通老師帶領，各成員分享目前研究中使用 AI 工具的初步經驗，並共同討論社群全年研究流程地圖的框架。',
+        highlight: '• 確認六大研究階段框架（選題→PICO→文獻→統計→撰寫→投稿）\n• 各系所研究需求差異大，工具選用需因地制宜\n• 下次聚會將聚焦量化/質性資料整理的 AI 自動化工具',
+        tools: 'Claude、NotebookLM、SciSpace',
+        link: ''
+      }
+    });
+    renderAnnouncements([
+      { text: '第二次聚會時間調查開放中，請盡速填寫！' },
+      { text: '工具百科歡迎投稿，分享你用過的 AI 研究工具 👇' }
+    ]);
+    renderPoll({
+      id: 'poll_2',
+      active: true,
+      round: '第二次聚會時間調查',
+      question: '請勾選 6 月份你方便出席的日期',
+      hint: '可複選，票數越多代表越多人方便。最終確定日期將另行公告。',
+      options: [
+        { id:'d1', date:'6 月 16 日（週一）18:30–20:30', note:'線上 Google Meet', voters:['張育通','施堯啟','陳郁雯'] },
+        { id:'d2', date:'6 月 18 日（週三）12:00–13:30', note:'線上 Google Meet', voters:['陳巧珊','張家瑜'] },
+        { id:'d3', date:'6 月 23 日（週一）18:30–20:30', note:'線上 Google Meet（原定日期）', voters:['張育通','陳巧珊','張家瑜','施堯啟','陳郁雯','高婕'] },
+        { id:'d4', date:'6 月 25 日（週三）12:00–13:30', note:'線上 Google Meet', voters:['葉昱辰','鄭韻如'] },
+      ]
+    });
+    loadTools();
+    return;
+  }
+  // 正式模式：從 GAS 讀取
+  try {
+    const res = await fetch(`${GAS_URL}?action=getAll`);
+    const data = await res.json();
+    initEvents(data.records || {});
+    renderAnnouncements(data.announcements || []);
+    renderPoll(data.poll || null);
+    renderTools(data.tools || []);
+  } catch(e) {
+    initEvents({});
+    renderPoll(null);
+    loadTools();
+  }
+}
+
+// ══════════════════════════════════════
+// SCROLL ANIMATION
+// ══════════════════════════════════════
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// ══ BOOT ══
+// ══════════════════════════════════════
+// BOOT
+// ══════════════════════════════════════
 initPipeline();
 initMembers();
-initEvents();
-loadTools();
+loadAll();
 </script>
 </body>
 </html>
